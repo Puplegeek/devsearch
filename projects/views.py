@@ -33,4 +33,4 @@ def project(request,pk):
     projectObj = Project.objects.get(id=pk)
     tags = projectObj.tags.all()
     print('projectobj:', projectObj)
-    return render(request,'projects/single-project.html',{'project':projectObj,'tegs': tags})
+    return render(request,'projects/single-project.html',{'project':projectObj,'tags': tags})
