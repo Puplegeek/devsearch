@@ -13,34 +13,33 @@
               <h2 class="dev__name">{{profile.name}}</h2>
               <p class="dev__title">{{profile.short_intro}}</p>
               <p class="dev__location">Based in {{profile.location}}</p>
+              
               <ul class="dev__social">
                 {% if profile.social_github %}
                 <li>
-                  <a title="Github" href="{{profle.social_github}}" target="_blank"><i class="im im-github"></i></a>
+                  <a title="Github" href="{{profile.social_github}}" target="_blank"><span class="material-icons">code</span></a>
                 </li>
-                (% endif %)
-
-                {% if profile.social_twiter %}
-
+                {% endif %}
+              
+                {% if profile.social_twitter %}
                 <li>
-                  <a title="Twitter" href="{{ profile.social_twiter }}" target="_blank"><i class="im im-twitter"></i></a>
+                  <a title="Twitter" href="{{profile.social_twitter}}" target="_blank"><span class="material-icons">chat_bubble</span></a>
                 </li>
-
-                (% endif %)
-
-                {% if profile.social_linkdin %}
+                {% endif %}
+              
+                {% if profile.social_linkedin %}
                 <li>
-                  <a title="LinkedIn" href="{{profile.social_linkdin}}" target="_blank"><i class="im im-linkedin"></i></a>
+                  <a title="LinkedIn" href="{{profile.social_linkedin}}" target="_blank"><span class="material-icons">business_center</span></a>
                 </li>
-                (% endif %)
-
+                {% endif %}
+              
                 {% if profile.social_website %}
                 <li>
-                  <a title="Personal Website" href="{{profile.social_website}}" target="_blank"><i class="im im-globe"></i></a>
+                  <a title="Personal Website" href="{{profile.social_website}}" target="_blank"><span class="material-icons">language</span></a>
                 </li>
-                (% endif %)
-
+                {% endif %}
               </ul>
+              
               <a href="#" class="btn btn--sub btn--lg">Send Message </a>
             </div>
           </div>
@@ -76,7 +75,7 @@
             <h3 class="devInfo__title">Projects</h3>
             <div class="grid grid--two">
 
-              (% for project in profile.project_set.all %)
+              {% for project in profile.project_set.all %}
               <div class="column">
                 <div class="card project">
                   <a href="{% url 'project' project.id %}" class="project">
@@ -85,8 +84,8 @@
                       <h3 class="project__title">{{project.title}}</h3>
                       <p><a class="project__author" href="{% url 'user-profile' project.owner.id %}">By {{ project.owner.name}}</a></p>
                       <p class="project--rating">
-                        <span style="font-weight: bold;">{{project.vote_ratio}}</span> Postitive
-                        Feedback ({{project.vote_total}} Vote{{project.vote_total|pluralize:"s"}})
+                        <span style="font-weight: bold;">{{project.vote_ratio}}</span> Positive
+                        Feedback ({{project.vote_total}} Votes)
                       </p>
                       <div class="project__tags">
                        {% for tag in project.tags.all %}
@@ -100,7 +99,7 @@
                   </a>
                 </div>
               </div>
-
+              {% endfor %}
     
             </div>
           </div>
@@ -109,4 +108,4 @@
     </div>
   </main>
 
-{% endblock content%}
+{% endblock content %}
