@@ -73,10 +73,22 @@ def userProfile(request, pk):
     profile = Profile.objects.get(id=pk)
 
     # Corrected line: Exclude skills where description is empty
-    topSkills = profile.skill_set.exclude(description="")
+    topSkills = profile.skill_set.exclude(description_exact="")
     # Include only skills where description is empty
     otherSkills = profile.skill_set.filter(description="")
 
     # Note: Changed 'topSkill' to 'topSkills' in the context for consistency
     context = {'profile': profile, 'topSkills': topSkills, 'otherSkills': otherSkills}
     return render(request, 'users/user-profile.html', context)
+
+@login_required(login_url='login')
+def userAccount(request):
+    profile = request.user.profile
+
+    # Corrected line: Exclude skills where description is empty
+    skills = profile.skill_set.all()
+    projects = profile.project_set.all()
+    
+
+    context = {'profile':profile, 'skills':skills}
+    return render(request, 'users/account.html', context)
